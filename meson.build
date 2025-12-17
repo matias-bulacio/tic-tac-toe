@@ -8,12 +8,15 @@ project(
 
 incdir = include_directories('include')
 
+ncurses = dependency('ncurses')
+
 dependencies = [
+	ncurses
 ]
 
 sources = [
-  'src/tic_tac_toe.c',
-  'src/term/term.c',
+  'src/app.c',
+  'src/start.c',
 ]
 
 exe = executable(

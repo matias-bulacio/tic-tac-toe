@@ -1,4 +1,4 @@
-#include "term/term.h"
+#include <include/app.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -16,18 +16,6 @@ int main(int argc, char **argv) {
 		exit(EXIT_FAILURE);
 	}
 
-	printf(TERM_STR_CLEAR_ALL);
-	zstr cursor = term_set_cursor(0, 0);
-	printf(ZSTR_FMT, ZSTR_ARG(cursor));
-	zstr_free(&cursor);
 
-	printf("Hello!");
-
-	cursor = term_move_cursor(-5, 5);
-	printf(ZSTR_FMT, ZSTR_ARG(cursor));
-	zstr_free(&cursor);
-
-	printf("Bye!");
-
-    return 0;
+    return app();
 }
