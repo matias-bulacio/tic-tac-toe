@@ -16,6 +16,7 @@ dependencies = [
 
 sources = [
   'src/app.c',
+  'src/input.c',
   'src/start.c',
 ]
 
