@@ -6,11 +6,14 @@ project(
   default_options : ['warning_level=3'],
 )
 
+incdir = include_directories('include')
+
 dependencies = [
 ]
 
 sources = [
-  'tic_tac_toe.c',
+  'src/tic_tac_toe.c',
+  'src/term/term.c',
 ]
 
 exe = executable(
@@ -18,6 +21,7 @@ exe = executable(
   sources,
   dependencies : dependencies,
   install : true,
+  include_directories : incdir
 )
 
 test('basic', exe)
