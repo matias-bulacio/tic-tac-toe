@@ -1,2 +1,2 @@
-Tic Tac Toe for the terminal!
+This is Tic Tac Toe for the terminal!
 
