@@ -1,18 +1,20 @@
+#include <include/coords.h>
 #include <include/input.h>
 #include <curses.h>
 
-struct cursor_pos input_move(int key) {
-		int y, x;
-		getyx(stdscr, y, x);
+coords input_move(int key, coords c) {
+	int y = c.y;
+	int x = c.x;
+	// getyx(stdscr, y, x);
 
-		int begy, begx;
-		getbegyx(stdscr, begy, begx);
+	int begy = 0, begx = 0;
+	// getbegyx(stdscr, begy, begx);
 
-		int maxy, maxx;
-		getmaxyx(stdscr, maxy, maxx);
+	int maxy = 2, maxx = 2;
+	// getmaxyx(stdscr, maxy, maxx);
 
 
-		switch (key) {
+	switch (key) {
 		case 'k':
 		case KEY_UP:
 			if(y > begy) y--;
@@ -29,11 +31,11 @@ struct cursor_pos input_move(int key) {
 		case KEY_RIGHT:
 			if(x < maxx) x++;
 			break;
-		}
+	}
 
-		struct cursor_pos ret = {
-			.y = y,
-			.x = x,
-		};
-		return ret;
+	coords ret = {
+		.y = y,
+		.x = x,
+	};
+	return ret;
 }

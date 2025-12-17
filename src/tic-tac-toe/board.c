@@ -1,3 +1,4 @@
+#include <include/coords.h>
 #include <assert.h>
 #include <include/tic-tac-toe/board.h>
 #include <curses.h>
@@ -47,8 +48,16 @@ void ttt_draw_board(BOARD *b){
 	move(prev_y, prev_x);
 }
 
-void ttt_add_piece(BOARD *b, board_row y, board_column x, player p) {
+void ttt_add_piece(BOARD *b, int y, int x, player p) {
 	assert(y < 3 && x < 3);
 
 	b->pieces[y][x] = p;
+}
+
+coords ttt_board_to_term_coords(BOARD *b, coords c) {
+	assert(c.x < 3 && c.y < 3);
+
+	c.x = b->base_x + c.x*4 + 2;
+	c.y = b->base_y + c.y*2 + 1;
+	return c;
 }

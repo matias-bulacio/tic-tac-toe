@@ -1,4 +1,5 @@
-#include "tic-tac-toe/board.h"
+#include <include/coords.h>
+#include <include/tic-tac-toe/board.h>
 #include <include/input.h>
 #include <curses.h>
 #include <include/app.h>
@@ -19,18 +20,29 @@ int app(void) {
 	// Using atexit so we cover all posible calls to exit()
 	atexit(endwin_);
 	BOARD b = ttt_new_board(5, 5);
+
+	ttt_draw_board(&b);
+
+	coords bc = {
+		.x = 1,
+		.y = 1,
+	};
+	coords pos = ttt_board_to_term_coords(&b, bc);
+	cmove(pos);
+
+
 	bool keep_open = true;
 	while (keep_open) {
 		// Draw
-		ttt_draw_board(&b);
 		refresh();
 
 		// Fetch
 		int c = getch();
 
 		// Compute
-		struct cursor_pos cursor_pos = input_move(c);
-		move(cursor_pos.y, cursor_pos.x);
+		bc = input_move(c, bc);
+		pos = ttt_board_to_term_coords(&b, bc);
+		cmove(pos);
 
 		if (c == 'q') {
 			keep_open = false;

@@ -1,11 +1,8 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-struct cursor_pos {
-	int y;
-	int x;
-};
+#include <include/coords.h>
 
-struct cursor_pos input_move(int key);
+coords input_move(int key, coords now);
 
 #endif // INPUT_H
