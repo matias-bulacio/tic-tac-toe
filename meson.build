@@ -18,6 +18,7 @@ sources = [
   'src/app.c',
   'src/input.c',
   'src/start.c',
+  'src/tic-tac-toe/board.c',
 ]
 
 exe = executable(

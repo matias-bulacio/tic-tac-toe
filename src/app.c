@@ -1,3 +1,4 @@
+#include "tic-tac-toe/board.h"
 #include <include/input.h>
 #include <curses.h>
 #include <include/app.h>
@@ -17,20 +18,23 @@ int app(void) {
 
 	// Using atexit so we cover all posible calls to exit()
 	atexit(endwin_);
-
+	BOARD b = ttt_new_board(5, 5);
 	bool keep_open = true;
 	while (keep_open) {
-		int c = getch();
-		struct cursor_pos cursor_pos = input_move(c);
+		// Draw
+		ttt_draw_board(&b);
+		refresh();
 
-		addch('#');
+		// Fetch
+		int c = getch();
+
+		// Compute
+		struct cursor_pos cursor_pos = input_move(c);
 		move(cursor_pos.y, cursor_pos.x);
 
 		if (c == 'q') {
 			keep_open = false;
 		}
-
-		refresh();
 	}
 
 	return 0;
