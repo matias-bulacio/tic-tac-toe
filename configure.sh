@@ -1,14 +1,11 @@
 #!/bin/bash
 set -e
 
-if [ ! ${TTT_BUILD} ]; then
-	export TTT_BUILD=build/
-fi
+. vars.sh
 
-mkdir -p ${TTT_BUILD}
-(
-	cd ${TTT_BUILD}
-	meson setup ..
-)
+mkdir -p ${TTT_ALL_DIRS}
 
-ln -s ${TTT_BUILD}/compile_commands.json ./compile_commands.json
+meson setup ${TTT_RELEASE_D}	--buildtype=release
+meson setup ${TTT_DEBUG_D}		--buildtype=debug
+
+ln -s ${TTT_DEBUG_D}/compile_commands.json ./compile_commands.json
